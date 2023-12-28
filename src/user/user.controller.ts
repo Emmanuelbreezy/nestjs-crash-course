@@ -13,7 +13,8 @@ import { UserService } from './user.service';
 import { UpdateDataDto } from './dto/user-update-dto';
 import { CreateDataDto } from './dto/user-create-dto';
 import { AuthGuard } from '@nestjs/passport';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('user')
 @Controller('api/v1/user')
 export class UserController {
   constructor(private userService: UserService) {}

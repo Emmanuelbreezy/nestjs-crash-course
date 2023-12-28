@@ -4,6 +4,7 @@ import * as cors from 'cors';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
+import { setupSwagger } from '../config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,9 +17,10 @@ async function bootstrap() {
     preflightContinue: false,
     optionsSuccessStatus: 204,
   };
-
   app.use(helmet());
   app.use(cors(corsOptions));
+  // Setup Swagger
+  setupSwagger(app);
 
   const prismaService = app.get(PrismaService);
   prismaService.enableShutdownHooks(app);
